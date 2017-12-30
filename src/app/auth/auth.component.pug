@@ -1,0 +1,39 @@
+// Mixins
+mixin input(type, label, variable)
+  .input-container
+    input(type=`${type}` id=`${label}` required [(ngModel)]=`user.${variable}` aria-describedby=`${variable}` name=`${variable}`)
+    label(for=`${label}`)=label
+    .bar
+
+mixin regInput(type, label, variable)
+  .input-container
+    input(type=`${type}` id=`reg-${label}` required [(ngModel)]=`regUser.${variable}` aria-describedby=`${variable}` name=`${variable}`)
+    label(for=`${label}`)=label
+    .bar
+
+mixin button(text, click_function)
+  .button-container
+    button('(click)'=click_function)
+      span=text
+  
+.container('[ngClass]'="{'active': isRegister}")
+  .card
+  .card
+    h1.title Login
+    form
+      +input('text', 'Email', 'email')
+      +input('password', 'Password', 'password')
+      +button('Go', 'login(user)')
+      .footer
+        a(href='#') Forgot your password?
+  .card.alt
+    .toggle('(click)'='toggle()')
+    h1.title Register
+      .close('(click)'='toggle()')
+    form
+      +regInput('text', 'Email', 'email')
+      +regInput('text', 'First Name', 'firstName')
+      +regInput('text', 'Last Name', 'lastName')
+      +regInput('password', 'Password', 'password')
+      +regInput('password', 'Repeat Password', 'confirmedPassword')
+      +button('Next', 'register(regUser)')

@@ -12,6 +12,7 @@ import { UsersComponent } from './home/users/users.component';
 import { UserComponent } from './home/user/user.component';
 import { MediaComponent } from './home/media/media.component';
 import { EventsComponent } from './home/events/events.component';
+import { AuthComponent } from './auth/auth.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent,
@@ -29,8 +30,8 @@ const routes: Routes = [
   },
   /*{ path: 'dashboard', component: DashboardComponent,canActivate: [AuthGuard], outlet: "home"},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] , outlet: "home"},*/
-  { path: 'login', component: LoginComponent},
-  { path: 'register', component: RegisterComponent}
+  { path: 'login', component: AuthComponent},
+  { path: 'register', component: AuthComponent}
 ];
 
 export const AppRouting = RouterModule.forRoot(routes, { 

@@ -3,8 +3,6 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
 import { ProfileComponent } from './home/profile/profile.component';
 
 import { Routes, RouterModule  } from '@angular/router';
@@ -24,12 +22,11 @@ import { UsersComponent } from './home/users/users.component';
 import { UserComponent } from './home/user/user.component';
 import { MediaComponent } from './home/media/media.component';
 import { EventsComponent } from './home/events/events.component';
+import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    RegisterComponent,
     ProfileComponent,
     HomeComponent,
     DashboardComponent,
@@ -38,7 +35,8 @@ import { EventsComponent } from './home/events/events.component';
     UsersComponent,
     UserComponent,
     MediaComponent,
-    EventsComponent
+    EventsComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,

@@ -11,3 +11,7 @@ export class User {
     this.password = "";
   }
 }
+
+export class RegUser extends User {
+  confirmedPassword: string;
+}

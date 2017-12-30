@@ -1,28 +1,45 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import { User, RegUser } from '../../model/user';
-import { AuthService } from '../../service/auth.service';
+import { User, RegUser } from '../model/user';
+import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: 'app-auth',
+  templateUrl: './auth.component.html',
+  styleUrls: ['./auth.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class AuthComponent implements OnInit {
   
   user: User;
+  regUser: RegUser;
   message: string = '';
+  user_status: boolean;
+  error: boolean = false;
+  isRegister: boolean =false;
 
   constructor(private authService: AuthService, private router: Router) { 
     this.user = new User();
+    this.regUser = new RegUser();
   }
 
   ngOnInit() {
+  }
+
+  login(user: User){
+    console.log("login user");
+    console.log(user)
+    this.authService.loginUser(user).subscribe( res => {
+      this.user_status = res['success']; 
+      if(res['success'] == true) {
+        this.error=false;
+        this.authService.setUser(res['user']);
+        this.router.navigate(['/dashboard']);
+      } else {
+        this.error=true;
+        this.message = res['message'];
+      }
+    });
   }
 
   register(user: RegUser){
@@ -51,4 +68,7 @@ export class RegisterComponent implements OnInit {
     // }).subscribe();
   }
 
+  toggle():void {
+    this.isRegister=!this.isRegister;
+  }
 }

@@ -1,9 +1,10 @@
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs/Subject";
-import { User } from "../model/user";
+import { User, RegUser } from "../model/user";
 import { Observable } from "rxjs/Observable";
 import { Http, Response, Headers, RequestOptions } from "@angular/http";
 import { JwtHelper } from 'angular2-jwt';
+import 'rxjs/add/operator/map';
 
 
 @Injectable()
@@ -26,7 +27,7 @@ export class AuthService {
     this.userSource.next(user);
   }
   
-  registerUser(user: User): Observable<boolean> {
+  registerUser(user: RegUser): Observable<boolean> {
     console.log("Register: " + user);
     let body = JSON.stringify(user);
     let headers = new Headers();

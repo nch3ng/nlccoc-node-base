@@ -1,0 +1,60 @@
+
+<!-- Mixins-->
+<div class="container" [ngClass]="{'active': isRegister}">
+  <div class="card"></div>
+  <div class="card">
+    <h1 class="title">Login</h1>
+    <form>
+      <div class="input-container">
+        <input type="text" id="Email" required="required" [(ngModel)]="user.email" aria-describedby="email" name="email"/>
+        <label for="Email">Email</label>
+        <div class="bar"></div>
+      </div>
+      <div class="input-container">
+        <input type="password" id="Password" required="required" [(ngModel)]="user.password" aria-describedby="password" name="password"/>
+        <label for="Password">Password</label>
+        <div class="bar"></div>
+      </div>
+      <div class="button-container">
+        <button (click)="login(user)"><span>Go</span></button>
+      </div>
+      <div class="footer"><a href="#">Forgot your password?</a></div>
+    </form>
+  </div>
+  <div class="card alt">
+    <div class="toggle" (click)="toggle()"></div>
+    <h1 class="title">Register
+      <div class="close" (click)="toggle()"></div>
+    </h1>
+    <form>
+      <div class="input-container">
+        <input type="text" id="reg-Email" required="required" [(ngModel)]="regUser.email" aria-describedby="email" name="email"/>
+        <label for="Email">Email</label>
+        <div class="bar"></div>
+      </div>
+      <div class="input-container">
+        <input type="text" id="reg-First Name" required="required" [(ngModel)]="regUser.firstName" aria-describedby="firstName" name="firstName"/>
+        <label for="First Name">First Name</label>
+        <div class="bar"></div>
+      </div>
+      <div class="input-container">
+        <input type="text" id="reg-Last Name" required="required" [(ngModel)]="regUser.lastName" aria-describedby="lastName" name="lastName"/>
+        <label for="Last Name">Last Name</label>
+        <div class="bar"></div>
+      </div>
+      <div class="input-container">
+        <input type="password" id="reg-Password" required="required" [(ngModel)]="regUser.password" aria-describedby="password" name="password"/>
+        <label for="Password">Password</label>
+        <div class="bar"></div>
+      </div>
+      <div class="input-container">
+        <input type="password" id="reg-Repeat Password" required="required" [(ngModel)]="regUser.confirmedPassword" aria-describedby="confirmedPassword" name="confirmedPassword"/>
+        <label for="Repeat Password">Repeat Password</label>
+        <div class="bar"></div>
+      </div>
+      <div class="button-container">
+        <button (click)="register(regUser)"><span>Next</span></button>
+      </div>
+    </form>
+  </div>
+</div>
