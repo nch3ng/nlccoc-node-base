@@ -32,7 +32,7 @@ export class RegisterComponent implements OnInit {
       console.log(res);
       if( res['success'] == true ) {
         this.authService.setUser(res['user']);
-        this.router.navigate(['/profile']);
+        this.router.navigate(['/dashboard']);
       } else {
         this.message = res['message'];
       }

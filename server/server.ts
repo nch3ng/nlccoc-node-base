@@ -41,9 +41,6 @@ export class Server {
 
   private configure(){
   
-    //require('./models/db.js');
-    //require('./config/passport.js');
-
     //configure ejs
     this.app.set("views", path.join(__dirname, "views"));
     this.app.set("view engine", "ejs");
@@ -52,6 +49,7 @@ export class Server {
     this.app.use(bodyParser.urlencoded({extended: false}));
     this.app.use(morgan('dev'));
     DataAccess.connect();
+
     // catch 404 and forward to error handler
     this.app.use(function(err: any, req: express.Request, res: express.Response, next: express.NextFunction) {
       err.status = 404;
@@ -61,6 +59,8 @@ export class Server {
 
   private routes(): void{
     
+    // DO NOT use "/api", it is reserved for APIs
+
     let static_ng2 = express.static(path.join(__dirname, '../dist'));
     this.app.use(static_ng2);
     this.app.use(['/', '/login', '/register'], function(req, res, next) {
@@ -71,8 +71,8 @@ export class Server {
   private api(){
     let api = require('./api');
 
-    // REGISTER OUR ROUTES -------------------------------
-    // all of our routes will be prefixed with /api
+    // register api routes
+    // all of api routes will be prefixed with /api
     this.app.use('/api', api);
   }
 }

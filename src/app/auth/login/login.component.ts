@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
   
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
       if(res['success'] == true) {
         this.error=false;
         this.authService.setUser(res['user']);
-        this.router.navigate(['/']);
+        this.router.navigate(['/dashboard']);
       } else {
         this.error=true;
         this.message = res['message'];
