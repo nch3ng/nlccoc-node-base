@@ -1,14 +1,14 @@
-import User from "../../models/users";
+import User from "../../models/user";
+import * as jwt from "jsonwebtoken";
+import Config from "../../config";
 
-const env = process.env.NODE_ENV || 'development';
-const config = require('../../config')[env];
-const logger = require('../../logger');
-
-var jwt = require('jsonwebtoken');
+import logger = require("../../helpers/logger");
 module.exports = function(req, res) {
   var reqUser = req.body;
   console.log("login user");
+
   User.findOne({'email' : reqUser.email}, (err, user, done) => {
+    let config = Config.config;
 
     if( err )
       return done(err);

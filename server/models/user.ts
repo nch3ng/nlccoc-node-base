@@ -1,8 +1,9 @@
 import * as mongoose from "mongoose";
 import * as crypto  from "crypto";
 import * as jwt from "jsonwebtoken";
-const env = process.env.NODE_ENV || 'development';
-const config = require('../config')[env];
+
+import Config from "../config";
+let config = Config.config;
 
 export interface IUser extends mongoose.Document {
   email?: string;
@@ -47,7 +48,7 @@ userSchema.methods.generateJwt = function() {
   return jwt.sign({
     _id: this._id,
     email: this.email,
-    name: this.name,
+    name: this.firstName + ' ' + this.lastName,
     exp: Math.floor(expiry.getTime() / 1000),
   }, config.secret); // DO NOT KEEP YOUR SECRET IN THE CODE!
 };

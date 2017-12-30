@@ -1,14 +1,15 @@
-import User from "../../models/users";
+import User from "../../models/user";
 
 module.exports = function(req, res) {
   console.log("Registering user: " + req.body.email);
   var user = new User();
-    user.firstName = req.body.name;
+    user.firstName = req.body.firstName;
+    user.lastName = req.body.lastName;
     user.email = req.body.email;
   
-    // console.log(req.body.name);
-    // console.log(req.body.email);
-    // console.log(req.body.password);
+    console.log(req.body.firstName + ' ' + req.body.lastName);
+    console.log(req.body.email);
+    console.log(req.body.password);
     user.setPassword(req.body.password);
   
     user.save(function(err) {
