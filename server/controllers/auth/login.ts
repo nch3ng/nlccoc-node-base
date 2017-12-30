@@ -3,9 +3,10 @@ import * as jwt from "jsonwebtoken";
 import Config from "../../config";
 
 import logger = require("../../helpers/logger");
+
 module.exports = function(req, res) {
   var reqUser = req.body;
-  console.log("login user");
+  logger.debug("login user");
 
   User.findOne({'email' : reqUser.email}, (err, user, done) => {
     let config = Config.config;

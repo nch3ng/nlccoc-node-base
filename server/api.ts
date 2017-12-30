@@ -1,4 +1,5 @@
 import * as express from 'express';
+import logger = require("./helpers/logger");
 let router = express.Router();
 let auth = require("./controllers/auth/middleware/auth");
 
@@ -11,10 +12,10 @@ router.use(function timeLog (req, res, next) {
   next()
 });
 
-
 router.post('/register', registerCtrl);
 router.post('/login', loginCtrl);
 router.get('/check-state', auth.verifyToken, (req, res) => {
+  logger.debug("check-state");
   let content = {
     success: true,
     message: 'Successfully logged in'

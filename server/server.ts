@@ -31,8 +31,12 @@ export class Server {
 
     this.app = express();
     this.configure();
+    
+    // API has to be initialized first becasue the app is built in ng2 and the routes are overlap with /
+    this.api();
+
+    // routes has to be initialized after APIs
     this.routes();
-    //this.api();
   }
 
   private configure(){
@@ -56,18 +60,20 @@ export class Server {
   }
 
   private routes(): void{
-    const router = express.Router();
-    let api = require('./api');
-
-// REGISTER OUR ROUTES -------------------------------
-// all of our routes will be prefixed with /api
-    this.app.use('/api', api);
+    
     let static_ng2 = express.static(path.join(__dirname, '../dist'));
     this.app.use(static_ng2);
     this.app.use(['/', '/login', '/register'], function(req, res, next) {
       // Just send the index.html for other files to support HTML5Mode
       res.sendFile('/index.html', { root: path.join(__dirname, '../dist') });
     });
+  }
+  private api(){
+    let api = require('./api');
+
+    // REGISTER OUR ROUTES -------------------------------
+    // all of our routes will be prefixed with /api
+    this.app.use('/api', api);
   }
 }
 
