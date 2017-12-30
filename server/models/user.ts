@@ -1,19 +1,28 @@
-var mongoose = require('mongoose');
-var crypto = require('crypto');
-var jwt = require('jsonwebtoken');
-
+import * as mongoose from "mongoose";
+import * as crypto  from "crypto";
+import * as jwt from "jsonwebtoken";
 const env = process.env.NODE_ENV || 'development';
 const config = require('../config')[env];
 
-var Schema = mongoose.Schema;
+export interface IUser extends mongoose.Document {
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  hash?: String;
+  salt?: String;
+};
 
-var userSchema = new mongoose.Schema({
+export const userSchema = new mongoose.Schema({
   email: {
     type: String,
     unique: true,
     required: true
   },
-  name: {
+  firstName: {
+    type: String,
+    required: true
+  },
+  lastName: {
     type: String,
     required: true
   },
@@ -39,10 +48,10 @@ userSchema.methods.generateJwt = function() {
     _id: this._id,
     email: this.email,
     name: this.name,
-    exp: parseInt(expiry.getTime() / 1000),
+    exp: Math.floor(expiry.getTime() / 1000),
   }, config.secret); // DO NOT KEEP YOUR SECRET IN THE CODE!
 };
 
-var User = mongoose.model('User', userSchema);
+const User = mongoose.model<IUser>('User', userSchema);
 
 export default User;

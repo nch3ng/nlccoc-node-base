@@ -1,6 +1,7 @@
-var express = require('express')
-var users_router = express.Router();
-var user_router = express.Router();
+import * as express from 'express';
+
+let users_router = express.Router();
+let user_router = express.Router();
 // define the home page route
 users_router.get('/', function (req, res) {
   res.send('users list')

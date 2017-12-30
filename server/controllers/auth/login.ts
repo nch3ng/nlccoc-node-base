@@ -1,13 +1,14 @@
-User = require("../../models/users");
+import User from "../../models/users";
+
 const env = process.env.NODE_ENV || 'development';
 const config = require('../../config')[env];
-logger = require('../../logger');
+const logger = require('../../logger');
 
 var jwt = require('jsonwebtoken');
 module.exports = function(req, res) {
   var reqUser = req.body;
   console.log("login user");
-  User.findOne({'email' : reqUser.email}, (err, user) => {
+  User.findOne({'email' : reqUser.email}, (err, user, done) => {
 
     if( err )
       return done(err);
